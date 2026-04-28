@@ -2,6 +2,8 @@ package com.authentication.jwtServer.controlller;
 
 import com.authentication.jwtServer.dto.TokenRequestDto;
 import com.authentication.jwtServer.dto.TokenResponseDto;
+import com.authentication.jwtServer.dto.ValidateTokenRequestDto;
+import com.authentication.jwtServer.dto.ValidateTokenResponseDto;
 import com.authentication.jwtServer.service.JwtServerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,5 +22,11 @@ public class JwtServerController {
     public ResponseEntity<TokenResponseDto> generate(@RequestBody TokenRequestDto tokenRequestDto) {
         TokenResponseDto tokenResponseDto = jwtServerService.generateToken(tokenRequestDto);
         return ResponseEntity.ok(tokenResponseDto);
+    }
+
+    @PostMapping("/validate")
+    public ResponseEntity<ValidateTokenResponseDto> validate(@RequestBody ValidateTokenRequestDto request) {
+        ValidateTokenResponseDto response = jwtServerService.validateToken(request);
+        return ResponseEntity.ok(response);
     }
 }
